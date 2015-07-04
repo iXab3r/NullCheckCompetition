@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using BenchmarkDotNet;
+using BenchmarkDotNet.Logging;
 using BenchmarkDotNet.Tasks;
 
 namespace NullCheckTestApp
@@ -21,7 +23,11 @@ namespace NullCheckTestApp
 
             try
             {
-                new BenchmarkRunner().RunCompetition(new NullCheckCompetition());
+                new BenchmarkRunner(new IBenchmarkLogger[]
+                {
+                    new BenchmarkConsoleLogger(),
+                    new BenchmarkStreamLogger(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "output.log")),
+                }).RunCompetition(new NullCheckCompetition());
             }
             finally
             {
