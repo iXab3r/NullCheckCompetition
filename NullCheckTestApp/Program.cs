@@ -7,19 +7,27 @@ namespace NullCheckTestApp
 {
     public class Program
     {
-        public static void Main(string[] _args)
+        public static void Main()
         {
             try
             {
                 Console.WindowWidth = 120;
                 Console.WindowHeight = 60;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //
+                Console.WriteLine("Could not reconfigure console window size - {0}", ex.Message);
             }
 
-            new BenchmarkRunner().RunCompetition(new NullCheckCompetition(), new BenchmarkSettings(1, 1));
+            try
+            {
+                new BenchmarkRunner().RunCompetition(new NullCheckCompetition());
+            }
+            finally
+            {
+                Console.WriteLine("Press any key...");
+                Console.ReadKey();
+            }
         }
 
     }

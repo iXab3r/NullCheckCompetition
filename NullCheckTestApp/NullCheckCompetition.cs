@@ -5,7 +5,10 @@ using BenchmarkDotNet.Tasks;
 
 namespace NullCheckTestApp
 {
-    [Task(platform: BenchmarkPlatform.X86, jitVersion: BenchmarkJitVersion.CurrentJit)]
+    [Task(
+            platform: BenchmarkPlatform.X86, 
+            jitVersion: BenchmarkJitVersion.CurrentJit
+    )]
     public class NullCheckCompetition
     {
         private object m_nullObjectToCheck = default(object);
@@ -82,7 +85,7 @@ namespace NullCheckTestApp
             return NullCheckThroughAnonymousClass(_objectToValidate, _containerProvider());
         }
 
-        public static string NullCheckThroughAnonymousClass<T>(object _objectToValidate, T _container) where T : class
+        private static string NullCheckThroughAnonymousClass<T>(object _objectToValidate, T _container) where T : class
         {
             if (_objectToValidate != null || _container == null)
             {
@@ -98,7 +101,7 @@ namespace NullCheckTestApp
         }
 
 
-        public static string NullCheckThroughRawCheck(object _objectToValidate, string _objectName)
+        private static string NullCheckThroughRawCheck(object _objectToValidate, string _objectName)
         {
             if (_objectToValidate != null || _objectName == null)
             {
@@ -108,25 +111,25 @@ namespace NullCheckTestApp
             return _objectName;
         }
 
-        public static string NullCheckThroughSingleLambda(object _objectToValidate, Expression<Func<object>> _expression)
+        private static string NullCheckThroughSingleLambda(object _objectToValidate, Expression<Func<object>> _expression)
         {
             if (_objectToValidate != null || _expression == null)
             {
                 return string.Empty;
             }
-            return GetName(_expression);
+            return ExtractNameFromExpression(_expression);
         }
 
-        public static string NullCheckThroughDoubleLambda(object _objectToValidate, Func<Expression<Func<object>>> _expression)
+        private static string NullCheckThroughDoubleLambda(object _objectToValidate, Func<Expression<Func<object>>> _expression)
         {
             if (_objectToValidate != null || _expression == null)
             {
                 return string.Empty;
             }
-            return GetName(_expression());
+            return ExtractNameFromExpression(_expression());
         }
 
-        private static string GetName(Expression<Func<object>> exp)
+        private static string ExtractNameFromExpression(Expression<Func<object>> exp)
         {
             MemberExpression body = exp.Body as MemberExpression;
 
@@ -136,6 +139,10 @@ namespace NullCheckTestApp
                 body = ubody.Operand as MemberExpression;
             }
 
+            if (body == null)
+            {
+                return string.Empty;
+            }
             return body.Member.Name;
         }
     }
