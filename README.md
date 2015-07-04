@@ -16,9 +16,7 @@ First of all, let's all agree, that there cannot be faster(performance cost) and
 		}
 	}
 	
-Everything in that approach works fine right until you will rename you argument "_arg" to something else, e.g. "_newArg". By default, Visual Studio WILL NOT rename string literal "_arg" in ArgumentNullException constructor.  Of course, there are tools like ReSharper, that will do that for you, but usually not all developers in team have them installed. So, we need a better method to validate arguments.
-
-I will provide code and test results for 4 methods.
+Everything in that approach works fine right until you will rename you argument "_arg" to something else, e.g. "_newArg". By default, Visual Studio WILL NOT rename string literal "_arg" in ArgumentNullException's constructor.  Of course, there are tools like ReSharper, that will do that for you, but usually not all developers in team have them installed. So, we need a better method to validate arguments.
 
 Single-labmda expression approach
 ---------------------------------
