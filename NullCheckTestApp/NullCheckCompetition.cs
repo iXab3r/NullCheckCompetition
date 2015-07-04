@@ -6,16 +6,16 @@ using BenchmarkDotNet.Tasks;
 namespace NullCheckTestApp
 {
     [Task(
-            platform: BenchmarkPlatform.X86, framework:BenchmarkFramework.V45
-    )]
-    [Task(
-            platform: BenchmarkPlatform.X64, framework: BenchmarkFramework.V45
-    )]
-    [Task(
             platform: BenchmarkPlatform.X86, framework: BenchmarkFramework.V40
     )]
     [Task(
             platform: BenchmarkPlatform.X64, framework: BenchmarkFramework.V40
+    )]
+    [Task(
+            platform: BenchmarkPlatform.X86, framework: BenchmarkFramework.V45
+    )]
+    [Task(
+            platform: BenchmarkPlatform.X64, framework: BenchmarkFramework.V45
     )]
     public class NullCheckCompetition
     {
