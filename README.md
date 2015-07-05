@@ -73,6 +73,9 @@ Common:  Type=NullCheckCompetition  Mode=Throughput  Jit=CurrentJit
  SuccessLazyAnonymousClass |      X64 |  V40 |   8.78 ns |  0.0296 ns | 113835487.67 |
            SuccessRawCheck |      X64 |  V40 |   1.08 ns | 0.00681 ns | 926345022.24 |
        SuccessSingleLambda |      X64 |  V40 | 628.28 ns |    3.14 ns |   1591649.56 |
+      
+                    Method | Platform | .NET |   AvrTime |     StdDev |         op/s |
+-------------------------- |--------- |----- |---------- |----------- |------------- |
         FailAnonymousClass |      X64 |  V45 |  67.12 ns |    2.76 ns |  14898130.43 |
           FailDoubleLambda |      X64 |  V45 | 675.43 ns |   52.53 ns |   1480531.17 |
     FailLazyAnonymousClass |      X64 |  V45 |  69.63 ns |    2.50 ns |  14361232.75 |
@@ -83,6 +86,9 @@ Common:  Type=NullCheckCompetition  Mode=Throughput  Jit=CurrentJit
  SuccessLazyAnonymousClass |      X64 |  V45 |   8.76 ns |   0.443 ns | 114092370.45 |
            SuccessRawCheck |      X64 |  V45 |   1.09 ns |  0.0149 ns | 920809453.85 |
        SuccessSingleLambda |      X64 |  V45 | 631.60 ns |   29.57 ns |   1583458.93 |
+       
+                    Method | Platform | .NET |   AvrTime |     StdDev |         op/s |
+-------------------------- |--------- |----- |---------- |----------- |------------- |
         FailAnonymousClass |      X86 |  V40 |  63.15 ns |    1.69 ns |  15834371.72 |
           FailDoubleLambda |      X86 |  V40 | 629.63 ns |   17.85 ns |   1588245.11 |
     FailLazyAnonymousClass |      X86 |  V40 |  66.76 ns |   0.987 ns |  14979842.49 |
@@ -93,6 +99,9 @@ Common:  Type=NullCheckCompetition  Mode=Throughput  Jit=CurrentJit
  SuccessLazyAnonymousClass |      X86 |  V40 |   7.09 ns |  0.0586 ns | 141005871.21 |
            SuccessRawCheck |      X86 |  V40 |   1.61 ns | 0.00803 ns | 620122392.11 |
        SuccessSingleLambda |      X86 |  V40 | 593.16 ns |   19.43 ns |   1685878.14 |
+       
+                    Method | Platform | .NET |   AvrTime |     StdDev |         op/s |
+-------------------------- |--------- |----- |---------- |----------- |------------- |
         FailAnonymousClass |      X86 |  V45 |  62.33 ns |    4.85 ns |  16044173.38 |
           FailDoubleLambda |      X86 |  V45 | 610.09 ns |   18.33 ns |   1639089.27 |
     FailLazyAnonymousClass |      X86 |  V45 |  65.15 ns |   0.226 ns |  15349795.19 |
