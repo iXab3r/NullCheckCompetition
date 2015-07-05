@@ -7,41 +7,45 @@ As most of you know, there are at least 4 approaches of testing method's argumen
 Raw check approach
 ---------
 First of all, let's all agree, that there cannot be faster(performance cost) and cheaper(memory cost) method than raw check, but it has it has other cons, like maintainability and readability
-   
-    public void MethodToValidate(object _arg)
-    {
-		if (_arg == null)
-		{
-			throw new ArgumentNullException("_arg");
-		}
+```
+public void MethodToValidate(object _arg)
+{
+	if (_arg == null)
+	{
+		throw new ArgumentNullException("_arg");
 	}
-	
+}
+```
 Everything in that approach works fine right until you will rename you argument "_arg" to something else, e.g. "_newArg". By default, Visual Studio WILL NOT rename string literal "_arg" in ArgumentNullException's constructor.  Of course, there are tools like ReSharper, that will do that for you, but usually not all developers in team have them installed. So, we need a better method to validate arguments.
 
 Single-labmda expression approach
 ---------------------------------
-    public void MethodToValidate(object _arg)
-    {
-		ThrowIfNull(_arg, () => _arg);
-	}
-
+```
+public void MethodToValidate(object _arg)
+{
+	ThrowIfNull(_arg, () => _arg);
+}
+```
 This method uses lambda's Member/Unary Expression properties to extract argument name from expression body. 
 
 Double-labmda expression approach
 ---------------------------------
-    public void MethodToValidate(object _arg)
-    {
-		ThrowIfNull(_arg, () => () => _arg);
-	}
+```
+public void MethodToValidate(object _arg)
+{
+	ThrowIfNull(_arg, () => () => _arg);
+}
+```
 There is one bad thing with single-lambda approach - expression will be compilated event if argument is not null => "success" checks will cost almost as high as "fail" checks. Double-lambda method does not have price - internal expression will be compiled only if argument IS null.
 
 Anonymous class approach
 ------------------------
-    public void MethodToValidate(object _arg)
-    {
-		ThrowIfNull(_arg, new { _arg });
-	}
-
+```
+public void MethodToValidate(object _arg)
+{
+	ThrowIfNull(_arg, new { _arg });
+}
+```
 This approach uses anonymous class, that will be created during compile-time by compiler. Compiled class will have only one property and property name will be the same as the arg's name => it can be extracted via Reflection. As you will see from test results, cost of that operation is fairly low
 
 Test results
@@ -49,12 +53,13 @@ Test results
 I got that results on my machine. You can download and build sources to get your results. I used [BenchmarkDotNet](https://github.com/PerfDotNet/BenchmarkDotNet) to avoid writing test code by myself. It's a great lib, you should try it by yourself :)
 
 
-
+```
 // BenchmarkDotNet=v0.7.6.0
 // OS=Microsoft Windows NT 6.2.9200.0
 // Processor=Intel(R) Core(TM) i7-3770K CPU @ 3.50GHz, ProcessorCount=8
 // CLR=MS.NET 4.0.30319.0, Arch=64-bit  [RyuJIT]
 Common:  Type=NullCheckCompetition  Mode=Throughput  Jit=CurrentJit
+```
 
                     Method | Platform | .NET |   AvrTime |     StdDev |         op/s |
 -------------------------- |--------- |----- |---------- |----------- |------------- |
