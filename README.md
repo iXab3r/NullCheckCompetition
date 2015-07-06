@@ -7,7 +7,7 @@ As most of you know, there are at least 4 approaches of testing method's argumen
 Raw check approach
 ---------
 First of all, let's all agree, that there cannot be faster(performance cost) and cheaper(memory cost) method than raw check, but it has it has other cons, like maintainability and readability
-```
+```csharp
 public void MethodToValidate(object _arg)
 {
 	if (_arg == null)
@@ -20,7 +20,7 @@ Everything in that approach works fine right until you will rename you argument 
 
 Single-labmda expression approach
 ---------------------------------
-```
+```csharpcsharp
 public void MethodToValidate(object _arg)
 {
 	ThrowIfNull(_arg, () => _arg);
@@ -30,7 +30,7 @@ This method uses lambda's Member/Unary Expression properties to extract argument
 
 Double-labmda expression approach
 ---------------------------------
-```
+```csharp
 public void MethodToValidate(object _arg)
 {
 	ThrowIfNull(_arg, () => () => _arg);
@@ -40,7 +40,7 @@ There is one bad thing with single-lambda approach - expression will be compilat
 
 Anonymous class approach
 ------------------------
-```
+```csharp
 public void MethodToValidate(object _arg)
 {
 	ThrowIfNull(_arg, new { _arg });
